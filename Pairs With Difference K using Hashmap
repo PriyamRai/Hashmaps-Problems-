@@ -1,0 +1,38 @@
+#include <unordered_map>
+int getPairsWithDifferenceK(int *arr, int n, int k) {
+	// Write your code here
+    
+    unordered_map<int,int> mymap ;
+    for(int i=0;i<n;i++) {
+        mymap[arr[i]]++;
+        
+    }
+   
+    int a=0;
+    for(int i=0;i<n;i++){
+        
+        
+        if(k==0)
+        {
+            int cnt=mymap[arr[i]];
+            a+=(cnt*(cnt-1))/2;
+            mymap[arr[i]]=0;
+            continue;
+        }
+        
+        int num=arr[i]+k;
+        int num2=arr[i]-k;
+    
+         if(mymap[num]>0) {
+            a+=mymap[num]*mymap[arr[i]];
+            
+         }
+         if(mymap[num2]>0){
+            a+=mymap[num2]*mymap[arr[i]];
+        }
+        mymap[arr[i]]=0;
+        
+    }
+    return a;
+    
+  }
